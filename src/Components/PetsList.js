@@ -4,6 +4,8 @@ import store from "../petStore";
 import { observer } from "mobx-react";
 
 function PetsList() {
+	const search = e => store.setQuery(e.target.value);
+	const type = e => store.setType(e.target.value);
 	const petList = store.pets
 		.filter(
 			pet =>
@@ -27,7 +29,7 @@ function PetsList() {
 									placeholder='Search'
 									aria-label='Search'
 									aria-describedby='search-addon'
-									onChange={e => store.setQuery(e.target.value)}
+									onChange={search}
 								/>
 							</div>
 							<br />
@@ -35,7 +37,7 @@ function PetsList() {
 							<select
 								className='form-select'
 								aria-label='Default select example'
-								onChange={e => store.setType(e.target.value)}>
+								onChange={type}>
 								<option value='' selected>
 									All
 								</option>
