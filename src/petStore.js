@@ -21,6 +21,17 @@ class petStore {
 	setType = e => {
 		this.type = e;
 	};
+
+	addPet = newPet => {
+		newPet.id = this.pets[this.pets.length - 1].id + 1;
+		this.pets = [...this.pets, newPet];
+	};
+
+	updatePet = petNewInfo => {
+		this.pets = this.pets.map(pet =>
+			pet.id === petNewInfo.id ? petNewInfo : pet
+		);
+	};
 }
 
 const store = new petStore();
