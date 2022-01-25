@@ -19,7 +19,7 @@ function PetsList() {
 				pet.name.toLowerCase().includes(store.query.toLowerCase()) &&
 				pet.type.includes(store.type)
 		)
-		.map(pet => <PetItem key={pet.id} pet={pet} />);
+		.map(pet => <PetItem key={pet.id} pet={pet} query={store.query} />);
 	return (
 		<>
 			<section id='doctors' className='doctor-section pt-140'>
