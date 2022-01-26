@@ -2,8 +2,8 @@ import React, { useState } from "react";
 import PetItem from "./PetItem";
 import store from "../petStore";
 import { observer } from "mobx-react";
-import PetCreateModal from "./PetCreateModal";
 import { Button } from "react-bootstrap";
+import PetUpdateModal from "./PetUpdateModal";
 
 function PetsList() {
 	const [isOpen, setIsOpen] = useState(false);
@@ -67,7 +67,7 @@ function PetsList() {
 					<div className='row justify-content-center'>{petList}</div>
 				</div>
 			</section>
-			<PetCreateModal isOpen={isOpen} handleClose={handleClose} />
+			<PetUpdateModal isOpen={isOpen} handleClose={handleClose} />
 		</>
 	);
 }

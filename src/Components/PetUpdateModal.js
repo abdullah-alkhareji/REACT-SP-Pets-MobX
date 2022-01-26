@@ -3,14 +3,28 @@ import { Modal, Button, Form } from "react-bootstrap";
 import store from "../petStore";
 
 const PetUpdateModal = ({ isOpen, handleClose, pet }) => {
-	const [updatePet, setUpdatePet] = useState(pet);
+	const [petInfo, setPetInfo] = useState(
+		pet
+			? pet
+			: {
+					name: "",
+					type: "",
+					image: "",
+			  }
+	);
 
 	const handleChange = event =>
-		setUpdatePet({ ...updatePet, [event.target.name]: event.target.value });
+		setPetInfo({ ...petInfo, [event.target.name]: event.target.value });
 
-	const handleSubmit = event => {
+	const handleUpdate = event => {
 		event.preventDefault();
-		store.updatePet(updatePet);
+		store.updatePet(petInfo);
+		handleClose();
+	};
+
+	const handleAdd = event => {
+		event.preventDefault();
+		store.addPet(petInfo);
 		handleClose();
 	};
 
@@ -19,7 +33,7 @@ const PetUpdateModal = ({ isOpen, handleClose, pet }) => {
 			<Modal.Header closeButton>
 				<Modal.Title>Update</Modal.Title>
 			</Modal.Header>
-			<Form onSubmit={handleSubmit}>
+			<Form onSubmit={petInfo.id ? handleUpdate : handleAdd}>
 				<Modal.Body>
 					<Form.Group>
 						<Form.Label>Pet Name</Form.Label>
@@ -28,7 +42,7 @@ const PetUpdateModal = ({ isOpen, handleClose, pet }) => {
 							placeholder='Enter Pet Name'
 							name='name'
 							onChange={handleChange}
-							value={updatePet.name}
+							value={petInfo ? petInfo.name : ""}
 						/>
 					</Form.Group>
 					<br />
@@ -38,17 +52,17 @@ const PetUpdateModal = ({ isOpen, handleClose, pet }) => {
 							<option>Select Type</option>
 							<option
 								value='Cat'
-								selected={updatePet.type === "Cat" ? true : false}>
+								selected={petInfo.type === "Cat" ? true : false}>
 								Cat
 							</option>
 							<option
 								value='Dog'
-								selected={updatePet.type === "Dog" ? true : false}>
+								selected={petInfo.type === "Dog" ? true : false}>
 								Dog
 							</option>
 							<option
 								value='Rabbit'
-								selected={updatePet.type === "Rabbit" ? true : false}>
+								selected={petInfo.type === "Rabbit" ? true : false}>
 								Rabbit
 							</option>
 						</Form.Select>
@@ -61,7 +75,7 @@ const PetUpdateModal = ({ isOpen, handleClose, pet }) => {
 							placeholder='Enter Pet Image URL'
 							name='image'
 							onChange={handleChange}
-							value={updatePet.image}
+							value={petInfo ? petInfo.image : ""}
 						/>
 					</Form.Group>
 				</Modal.Body>

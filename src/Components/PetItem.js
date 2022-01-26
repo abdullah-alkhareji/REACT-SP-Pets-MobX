@@ -24,24 +24,15 @@ const PetItem = ({ pet, query }) => {
 							textToHighlight={pet.name}
 							searchWords={[query]}
 						/>
-						{/* {pet.name.toLowerCase().includes(query.toLowerCase()) &&
-							pet.name.replace(
-								query,
-								<Highlighter
-									highlightClassName='bg-light'
-									textToHighlight={query}
-									searchWords={[query]}>
-									{query}
-								</Highlighter>
-							)} */}
 					</h3>
-					<button
+					<Button
 						type='button'
-						className='btn btn-info'
+						variant='info'
+						className='m-2'
 						onClick={() => store.handleAdopt(pet.id)}>
 						Adopt
-					</button>
-					<Button variant='info' onClick={handleShow}>
+					</Button>
+					<Button variant='info' className='m-2' onClick={handleShow}>
 						Update
 					</Button>
 					<PetUpdateModal isOpen={isOpen} handleClose={handleClose} pet={pet} />
